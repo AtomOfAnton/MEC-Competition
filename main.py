@@ -46,9 +46,27 @@ for i in datasheetdict.values():
         i[5] = i[5]*2087 #average work hours in a year
     elif str(i[6]).lower() == "monthly":
         i[5] = i[5]*12 #average number of months in a year (no discrepancies so far :)
-    if i[10] not in temp:
-        temp.append(i[11])
+    #troubleshooting
+    
+    if i[9] not in temp:
+        temp.append(i[9])
 temp = [x for x in temp if x == x]
 
 
 #attributes in order of priority: skills, accessibility features, experience required, job type (full/part-time), min yearly salary
+
+def find_best(input):
+    for i in datasheetdict.values():
+        if input[4] >= i[5]:
+            i[12] += 1.5*levenshtein_similarity(input[0].lower(), i[10].lower())
+            i[12] += 1.5*levenshtein_similarity(input[1].lower(), i[11].lower())
+            i[12] += levenshtein_similarity(input[2].lower(), i[9].lower())
+            i[12] += levenshtein_similarity(input[3].lower(), i[7].lower())
+    return_list = []
+    sorted_list = reversed(sorted(datasheetdict.items(), key=lambda x: x[1][12]))
+    for i in range(0, 10):
+        return_list.append(sorted_list[i])
+        return_list = reversed(sorted(return_list.items(), key=lambda x:x[1][5]))
+    return return_list
+
+find_best(["EducationBachelors or better in Education or related field.Licenses & CertificationsHas License/CredentialingSpecial Education","Braille and Large Print Materials", "Entry Level", "Full Time", 50000])
