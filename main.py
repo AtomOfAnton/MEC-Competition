@@ -57,16 +57,16 @@ temp = [x for x in temp if x == x]
 
 def find_best(input):
     for i in datasheetdict.values():
-        if input[4] >= i[5]:
-            i[12] += 1.5*levenshtein_similarity(input[0].lower(), i[10].lower())
-            i[12] += 1.5*levenshtein_similarity(input[1].lower(), i[11].lower())
-            i[12] += levenshtein_similarity(input[2].lower(), i[9].lower())
-            i[12] += levenshtein_similarity(input[3].lower(), i[7].lower())
-    return_list = []
-    sorted_list = reversed(sorted(datasheetdict.items(), key=lambda x: x[1][12]))
-    for i in range(0, 10):
-        return_list.append(sorted_list[i])
-        return_list = reversed(sorted(return_list.items(), key=lambda x:x[1][5]))
-    return return_list
+        i[12] += 1.5*levenshtein_similarity(str(input[0]).lower(), str(i[10]).lower())
+        i[12] += 1.5*levenshtein_similarity(str(input[1]).lower(), str(i[11]).lower())
+        i[12] += levenshtein_similarity(str(input[2]).lower(), str(i[9]).lower())
+        i[12] += levenshtein_similarity(str(input[3]).lower(), str(i[7]).lower())
+    return_list = {"0": "0"}    
+    sorted_list = dict(reversed(sorted(datasheetdict.items(), key=lambda x: x[1][12])))
 
-find_best(["EducationBachelors or better in Education or related field.Licenses & CertificationsHas License/CredentialingSpecial Education","Braille and Large Print Materials", "Entry Level", "Full Time", 50000])
+    for i in range(1, 11):
+        return_list[sorted_list[str(i)][0]]= sorted_list[str(i)][1]
+    return_list = dict(reversed(sorted(return_list.items(), key=lambda x:x[1][5])))
+    return return_list[1:-1]
+
+print(find_best(["EducationBachelors or better in Education or related field.Licenses & CertificationsHas License/CredentialingSpecial Education","Braille and Large Print Materials", "Entry Level", "Full Time", 50000]))
