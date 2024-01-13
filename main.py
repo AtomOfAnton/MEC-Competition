@@ -5,25 +5,14 @@
 import math
 import pandas as pd
 df = pd.read_excel(r"C:\Users\Antho\Downloads\Dataset.xlsx")
-datasheetdict = {}
-index = df.iloc[:,0]
-title = df.iloc[:,1]
-description = df.iloc[:,2]
-max_salary = df.iloc[:,3]
-med_salary = df.iloc[:,4]
-min_salary = df.iloc[:,5]
-pay_period = df.iloc[:,6]
-job_type = df.iloc[:,7]
-location = df.iloc[:,8]
-experience_level = df.iloc[:,9]
-skills = df.iloc[:,10]
-accessibility_features = df.iloc[:,11]
+x = []
+for i in range(len(df.iloc[:,0])):
+    x.append(i)
+datasheetdict = dict([(z,[a, b, c, d, e, f, g, h, i, j, k, l]) for z, a, b, c, d, e, f, g, h, i, j, k, l in zip(x, df.iloc[:,0], df.iloc[:,1], df.iloc[:,2], df.iloc[:,3], df.iloc[:,4], df.iloc[:,5], df.iloc[:,6], df.iloc[:,7], df.iloc[:,8], df.iloc[:,9], df.iloc[:,10], df.iloc[:,11])])
 
 temp = []
-print(pay_period.values())
-for x in pay_period.values():
-    if x not in temp:
-        temp.append(x)
+for i in datasheetdict.values():
+    if i[5] not in temp and i[5]:
+        temp.append(i[5])
+temp = [x for x in temp if x == x]
 print(temp)
-importance_order = (skills,accessibility_features,experience_level,job_type, min_salary)
-attributes = []
