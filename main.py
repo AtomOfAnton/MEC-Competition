@@ -18,5 +18,5 @@ for i in datasheetdict.values():
         i[5] = i[5]*12
     if i[5] not in temp:
         temp.append(i[5])
-temp = [x for x in temp if x == x]
+temp = [int(x) for x in temp if x == x]
 print(temp)
