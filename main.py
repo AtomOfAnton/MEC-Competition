@@ -13,9 +13,10 @@ max_salary = df.iloc[:,4]
 med_salary = df.iloc[:,5]
 min_salary = df.iloc[:,6]
 pay_period = df.iloc[:,7]
-location = df.iloc[:,8]
-experience_level = df.iloc[:,9]
-skills = df.iloc[:,10]
-accessibiliy_features = df.iloc[:,11]
+job_type = df.iloc[:,8]
+location = df.iloc[:,9]
+experience_level = df.iloc[:,10]
+skills = df.iloc[:,11]
+accessibility_features = df.iloc[:,12]
 
-print(index,title,description,max_salary,med_salary,min_salary,pay_period,location,experience_level,skills,accessibiliy_features)
+importance_order = (skills,accessibility_features,experience_level,job_type, min_salary)
