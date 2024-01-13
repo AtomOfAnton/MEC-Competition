@@ -12,7 +12,11 @@ datasheetdict = dict([(z,[a, b, c, d, e, f, g, h, i, j, k, l]) for z, a, b, c, d
 
 temp = []
 for i in datasheetdict.values():
-    if i[5] not in temp and i[5]:
+    if str(i[6]).lower() == "hourly":
+        i[5] = i[5]*2087
+    elif str(i[6]).lower() == "monthly":
+        i[5] = i[5]*12
+    if i[5] not in temp:
         temp.append(i[5])
 temp = [x for x in temp if x == x]
 print(temp)
