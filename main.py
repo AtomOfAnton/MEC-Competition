@@ -2,13 +2,13 @@
 #Anthony Golubev, Mihir Patel
 #13/01/2024
 
-import math
+import math, os
 import pandas as pd
 from difflib import SequenceMatcher
 
 
 
-df = pd.read_excel(r"C:\Users\Antho\Downloads\Dataset.xlsx")
+df = pd.read_excel(r'https://github.com/AtomOfAnton/MEC-Competition/blob/110593e8b678da3a69b7ef98a92c5cd8d8ebe496/Dataset.xlsx')
 x = []
 for i in range(len(df.iloc[:,0])):
     x.append(i)
@@ -68,8 +68,4 @@ def find_best(input):
         return_list[sorted_list[str(i)][0]]= sorted_list[str(i)][1]
     return_list = dict(reversed(sorted(return_list.items(), key=lambda x:x[1][5])))
     return return_list[1:-1]
-<<<<<<< HEAD
-=======
 
-print(find_best(["EducationBachelors or better in Education or related field.Licenses & CertificationsHas License/CredentialingSpecial Education","Braille and Large Print Materials", "Entry Level", "Full Time", 50000]))
->>>>>>> e9b4ada36ca69c98253fe5b2c52a5fd07a1c9465
