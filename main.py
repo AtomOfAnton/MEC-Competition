@@ -8,10 +8,9 @@ from difflib import SequenceMatcher
 from io import BytesIO
 
 
-datatable = "https://github.com/AtomOfAnton/MEC-Competition/blob/82c1741c55836c404d88e2429e2eeb36904d5103/Dataset.xlsx"
-datatablecontent = rq.get(datatable).content
-print(datatablecontent, datatable)
-df = pd.read_excel(BytesIO(datatablecontent))
+loc = os.path.join(os.getcwd(), "MEC-Competition/Dataset.xlsx")
+df = pd.read_excel(loc)
+print(df)
 x = []
 for i in range(len(df.iloc[:,0])):
     x.append(i)
