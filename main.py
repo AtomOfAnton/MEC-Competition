@@ -3,14 +3,12 @@
 #13/01/2024
 
 import math, os
-import pandas as pd, requests as rq
+import pandas as pd
 from difflib import SequenceMatcher
-from io import BytesIO
 
 
 loc = os.path.join(os.getcwd(), "MEC-Competition/Dataset.xlsx")
 df = pd.read_excel(loc)
-print(df)
 x = []
 for i in range(len(df.iloc[:,0])):
     x.append(i)
@@ -63,11 +61,18 @@ def find_best(input):
         i[12] += 1.5*levenshtein_similarity(str(input[1]).lower(), str(i[11]).lower())
         i[12] += levenshtein_similarity(str(input[2]).lower(), str(i[9]).lower())
         i[12] += levenshtein_similarity(str(input[3]).lower(), str(i[7]).lower())
-    return_list = {"0": "0"}    
-    sorted_list = dict(reversed(sorted(datasheetdict.items(), key=lambda x: x[1][12])))
+    sorted_list_reversed = dict(sorted(datasheetdict.items(), key=lambda x: x[1][12]))
 
-    for i in range(1, 11):
-        return_list[sorted_list[str(i)][0]]= sorted_list[str(i)][1]
-    return_list = dict(reversed(sorted(return_list.items(), key=lambda x:x[1][5])))
-    return return_list[1:-1]
 
+    
+    indeces =list(sorted_list_reversed)[-11:-1]
+    output = {}
+    for i in datasheetdict.items():
+        if i[0] in indeces:
+            output = {i[0]:tuple(i[1])}
+    return output
+
+
+
+#test case
+print(find_best(("Bachelors", "Assistance Animals", "Entry Level", "Full Time", 50000)))
