@@ -69,4 +69,3 @@ def find_best(input):
     return_list = dict(reversed(sorted(return_list.items(), key=lambda x:x[1][5])))
     return return_list[1:-1]
 
-print(find_best(["EducationBachelors or better in Education or related field.Licenses & CertificationsHas License/CredentialingSpecial Education","Braille and Large Print Materials", "Entry Level", "Full Time", 50000]))
