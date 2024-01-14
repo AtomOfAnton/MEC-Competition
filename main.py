@@ -3,12 +3,15 @@
 #13/01/2024
 
 import math, os
-import pandas as pd
+import pandas as pd, requests as rq
 from difflib import SequenceMatcher
+from io import BytesIO
 
 
-
-df = pd.read_excel(r'https://github.com/AtomOfAnton/MEC-Competition/blob/110593e8b678da3a69b7ef98a92c5cd8d8ebe496/Dataset.xlsx')
+datatable = "https://github.com/AtomOfAnton/MEC-Competition/blob/82c1741c55836c404d88e2429e2eeb36904d5103/Dataset.xlsx"
+datatablecontent = rq.get(datatable).content
+print(datatablecontent, datatable)
+df = pd.read_excel(BytesIO(datatablecontent))
 x = []
 for i in range(len(df.iloc[:,0])):
     x.append(i)
